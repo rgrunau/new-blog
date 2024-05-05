@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("posts");
+const sortedPosts = allPosts.sort((a, b) => {
+    return new Date(b.data.pubDate) - new Date(a.data.pubDate);
+});
+console.log(sortedPosts);
+const mostRecentPosts = sortedPosts[0];
+---
+
+<div>
+    <h2>Most Recent Post</h2>
+    <a href={`/posts/${mostRecentPosts.slug}`} class="post-card">
+        <h3>{mostRecentPosts.data.title}</h3>
+        <p>{mostRecentPosts.data.date}</p>
+        <p>{mostRecentPosts.data.description}</p>
+    </a>
+</div>
+
+<style>
+    div {
+        width: 100%;
+        padding-top: 1.5rem;
+    }
+    h3 {
+        color: var(--base-color);
+    }
+
+    .post-card {
+        padding: 1rem;
+        border-radius: 5px;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        text-decoration: none;
+    }
+</style>
