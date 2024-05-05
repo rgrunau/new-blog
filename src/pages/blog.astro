@@ -6,7 +6,7 @@ const pageTitle = "My Astro Learning Blog";
 const allPosts = await getCollection("posts");
 ---
 
-<BaseLayout>
+<BaseLayout pageTitle={pageTitle}>
     <ul>
         {
             allPosts.map((post) => (

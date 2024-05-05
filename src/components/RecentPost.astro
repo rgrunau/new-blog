@@ -2,7 +2,7 @@
 import { getCollection } from "astro:content";
 const allPosts = await getCollection("posts");
 const sortedPosts = allPosts.sort((a, b) => {
-    return new Date(b.data.pubDate) - new Date(a.data.pubDate);
+    return new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime();
 });
 console.log(sortedPosts);
 const mostRecentPosts = sortedPosts[0];
@@ -12,7 +12,7 @@ const mostRecentPosts = sortedPosts[0];
     <h2>Most Recent Post</h2>
     <a href={`/posts/${mostRecentPosts.slug}`} class="post-card">
         <h3>{mostRecentPosts.data.title}</h3>
-        <p>{mostRecentPosts.data.date}</p>
+        <p>{mostRecentPosts.data.pubDate}</p>
         <p>{mostRecentPosts.data.description}</p>
     </a>
 </div>
