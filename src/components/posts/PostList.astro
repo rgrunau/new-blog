@@ -1,8 +1,9 @@
 ---
 import { getBlogPosts } from "../../helpers/getBlogPosts";
-const { fullList, latestPost } = await getBlogPosts();
+const { fullList, latestPost, fiveRecent } = await getBlogPosts();
 
 const { numberOfPosts } = Astro.props;
+console.log(numberOfPosts);
 ---
 
 <ul>
@@ -27,6 +28,23 @@ const { numberOfPosts } = Astro.props;
       </>
     )
   }
+
+  {
+    numberOfPosts === "recents" && (
+      <div class=" recents-list">
+        <h2>Further Reading</h2>
+        <div>
+          <ul>
+            {fiveRecent.map((post) => (
+              <li>
+                <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    )
+  }
 </ul>
 
 <style>
@@ -37,5 +55,9 @@ const { numberOfPosts } = Astro.props;
 
   li {
     margin-bottom: 1rem;
+  }
+
+  .recents-list {
+    margin-top: 4.5rem;
   }
 </style>

@@ -10,5 +10,6 @@ export async function getBlogPosts() {
   return {
     fullList: sortedPosts,
     latestPost: sortedPosts[0],
+    fiveRecent: sortedPosts.slice(1, 5),
   };
 }
