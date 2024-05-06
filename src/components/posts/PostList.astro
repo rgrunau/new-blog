@@ -1,19 +1,16 @@
 ---
 import { getBlogPosts } from "../../helpers/getBlogPosts";
+import PostComponent from "./PostComponent.astro";
 const { fullList, latestPost, fiveRecent } = await getBlogPosts();
 
 const { numberOfPosts } = Astro.props;
 console.log(numberOfPosts);
 ---
 
-<ul>
+<ul class="most-recent">
   {
     numberOfPosts === "all" &&
-      fullList.map((post) => (
-        <li>
-          <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-        </li>
-      ))
+      fullList.map((post) => <PostComponent post={post} />)
   }
 
   {
@@ -36,9 +33,7 @@ console.log(numberOfPosts);
         <div>
           <ul>
             {fiveRecent.map((post) => (
-              <li>
-                <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-              </li>
+              <PostComponent post={post} />
             ))}
           </ul>
         </div>
@@ -51,6 +46,10 @@ console.log(numberOfPosts);
   ul {
     list-style: none;
     padding: 0;
+  }
+
+  .most-recent {
+    margin-top: 4.5rem;
   }
 
   li {
