@@ -1,15 +1,31 @@
 ---
 import { getBlogPosts } from "../../helpers/getBlogPosts";
-const { fullList } = await getBlogPosts();
+const { fullList, latestPost } = await getBlogPosts();
+
+const { numberOfPosts } = Astro.props;
 ---
 
 <ul>
   {
-    fullList.map((post) => (
-      <li>
-        <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-      </li>
-    ))
+    numberOfPosts === "all" &&
+      fullList.map((post) => (
+        <li>
+          <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+        </li>
+      ))
+  }
+
+  {
+    numberOfPosts === "latest" && (
+      <>
+        <div>
+          <h2>Latest Post</h2>
+        </div>
+        <div>
+          <a href={`/posts/${latestPost.slug}`}>{latestPost.data.title}</a>
+        </div>
+      </>
+    )
   }
 </ul>
 

@@ -9,5 +9,6 @@ export async function getBlogPosts() {
   });
   return {
     fullList: sortedPosts,
+    latestPost: sortedPosts[0],
   };
 }
