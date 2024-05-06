@@ -19,9 +19,7 @@ console.log(numberOfPosts);
         <div>
           <h2>Latest Post</h2>
         </div>
-        <div>
-          <a href={`/posts/${latestPost.slug}`}>{latestPost.data.title}</a>
-        </div>
+        <PostComponent post={latestPost} single />
       </>
     )
   }

@@ -1,9 +1,68 @@
 ---
 const { post } = Astro.props;
+function formatDate(date: Date | string) {
+  const options = {
+    weekday: "short",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
+  // @ts-ignore
+  return new Date(date).toLocaleDateString("en-US", options);
+}
+
+const { single } = Astro.props;
 ---
 
-<li>
-  <a href={`/posts/${post.slug}`}>{post.data.title}</a>
-</li>
+{
+  !single && (
+    <li>
+      <a href={`/posts/${post.slug}`}>
+        <div class="post-item-body">
+          <div class="title-card">{post.data.title}</div>
+          <div>{formatDate(post.data.pubDate)}</div>
+        </div>
+      </a>
+    </li>
+  )
+}
 
-<style></style>
+{
+  single && (
+    <div>
+      <a href={`/posts/${post.slug}`}>
+        <div class="post-item-body">
+          <div class="title-card">{post.data.title}</div>
+          <div>{formatDate(post.data.pubDate)}</div>
+        </div>
+      </a>
+    </div>
+  )
+}
+
+<style>
+  li {
+    margin-bottom: 1rem;
+  }
+  a {
+    display: inline-block;
+    width: 100%;
+    color: var(--base-color);
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .post-item-body {
+    padding: 1rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .title-card {
+    font-size: 1.2rem;
+    color: var(--highlight-color);
+  }
+</style>
