@@ -1,0 +1,25 @@
+---
+import { getBlogPosts } from "../../helpers/getBlogPosts";
+const { fullList } = await getBlogPosts();
+---
+
+<ul>
+  {
+    fullList.map((post) => (
+      <li>
+        <a href={`/posts/${post.slug}`}>{post.data.title}</a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 1rem;
+  }
+</style>
