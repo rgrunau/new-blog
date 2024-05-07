@@ -1,19 +1,36 @@
 ---
 import { getCollection } from "astro:content";
+import { formatDate } from "../../helpers/formatDate";
 import PostLayout from "../../layouts/PostLayout.astro";
 
 export async function getStaticPaths() {
-    const blogEntries = await getCollection("posts");
-    return blogEntries.map((entry) => ({
-        params: { slug: entry.slug },
-        props: { entry },
-    }));
+  const blogEntries = await getCollection("posts");
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
 }
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+const pubDate = formatDate(entry.data.pubDate);
 ---
 
 <PostLayout title={entry.data.title} date={entry.data.pubDate}>
-    <Content />
+  <div>
+    <h2>
+      {entry.data.title}
+    </h2>
+    <div>
+      <h3>
+        by: {entry.data.author}
+      </h3>
+    </div>
+    <div>
+      <h4>
+        published on: {pubDate}
+      </h4>
+    </div>
+  </div>
+  <Content />
 </PostLayout>
