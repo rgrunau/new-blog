@@ -24,7 +24,7 @@ const { numberOfPosts } = Astro.props;
 }
 
 {
-  numberOfPosts === "recents" && (
+  numberOfPosts === "recents" && fiveRecent.length > 0 && (
     <div class=" recents-list">
       <h2>Further Reading</h2>
       <div>
