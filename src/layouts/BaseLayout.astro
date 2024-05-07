@@ -26,7 +26,6 @@ const { pageTitle } = Astro.props;
       import "../scripts/menu.js";
       (function fixMissingTitle() {
         const titleTag = document.getElementsByTagName("title");
-
         // look to see if title tag has text
         if (titleTag.length > 0) {
           let titleText = titleTag[0].innerText;
@@ -36,6 +35,7 @@ const { pageTitle } = Astro.props;
             let pathName = window.location.pathname;
             let cleanPathName = pathName.replace(/\//g, "");
             if (pathName === "/") {
+              console.log(pathName);
               document.title = "Robert Grunau | Home";
             } else {
               document.title = `Robert Grunau | ${cleanPathName}`;
