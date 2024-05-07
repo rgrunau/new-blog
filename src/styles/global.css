@@ -90,9 +90,8 @@ a {
   color: var(--base-color);
 }
 
-.nav-links a:hover,
-a:focus {
-  border: 1px solid rgb(0, 0, 0, 0.8);
+a:focus-visible {
+  border: 1px solid rgba(209, 209, 209, 0.8);
 }
 
 .expanded {

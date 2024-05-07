@@ -3,35 +3,35 @@ import Navigation from "../components/Navigation.astro";
 ---
 
 <header>
-    <a href="/">
-        <h1>Robert Grunau</h1>
-    </a>
-    <Navigation />
+  <a href="/" aria-label="back to home page">
+    <h1>Robert Grunau</h1>
+  </a>
+  <Navigation />
 </header>
 
 <style>
-    header {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 0.25rem;
+  header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding: 0.25rem;
+  }
+  a {
+    text-decoration: none;
+    color: rgb(215, 215, 215);
+    h1 {
+      font-size: 1.75rem;
+      margin: 0;
     }
-    a {
-        text-decoration: none;
-        color: rgb(215, 215, 215);
-        h1 {
-            font-size: 1.75rem;
-            margin: 0;
-        }
-    }
+  }
 
-    @media (min-width: 834px) {
-        header {
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-        }
+  @media (min-width: 834px) {
+    header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
     }
+  }
 </style>

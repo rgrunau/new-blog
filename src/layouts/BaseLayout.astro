@@ -7,26 +7,48 @@ const { pageTitle } = Astro.props;
 ---
 
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width" />
-        <meta name="generator" content={Astro.generator} />
-        <title>{pageTitle}</title>
-        <ViewTransitions />
-        <link rel="stylesheet" href="https://use.typekit.net/jef4awy.css" />
-    </head>
-    <body>
-        <Header />
-        <main>
-            <slot />
-        </main>
-        <Footer />
-        <script>
-            import "../scripts/menu.js";
-        </script>
-    </body><style>
-        main {
+  <head>
+    <title>{pageTitle}</title>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <ViewTransitions />
+    <link rel="stylesheet" href="https://use.typekit.net/jef4awy.css" />
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      import "../scripts/menu.js";
+      (function fixMissingTitle() {
+        const titleTag = document.getElementsByTagName("title");
+        // look to see if title tag has text
+        if (titleTag.length > 0) {
+          let titleText = titleTag[0].innerText;
+          console.log(titleText);
+          if (titleText === "") {
+            //get page name from browser.
+            let pathName = window.location.pathname;
+            let cleanPathName = pathName.replace(/\//g, "");
+            if (pathName === "/") {
+              console.log(pathName);
+              document.title = "Robert Grunau | Home";
+            } else {
+              document.title = `Robert Grunau | ${cleanPathName}`;
+            }
+          } else {
+            return;
+          }
         }
+      })();
+    </script>
+    <style>
+      main {
+      }
     </style>
+  </body>
 </html>

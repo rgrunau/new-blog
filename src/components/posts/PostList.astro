@@ -4,7 +4,6 @@ import PostComponent from "./PostComponent.astro";
 const { fullList, latestPost, fiveRecent } = await getBlogPosts();
 
 const { numberOfPosts } = Astro.props;
-console.log(numberOfPosts);
 ---
 
 <ul class="most-recent">
@@ -12,33 +11,32 @@ console.log(numberOfPosts);
     numberOfPosts === "all" &&
       fullList.map((post) => <PostComponent post={post} />)
   }
-
-  {
-    numberOfPosts === "latest" && (
-      <>
-        <div>
-          <h2>Latest Post</h2>
-        </div>
-        <PostComponent post={latestPost} single />
-      </>
-    )
-  }
-
-  {
-    numberOfPosts === "recents" && (
-      <div class=" recents-list">
-        <h2>Further Reading</h2>
-        <div>
-          <ul>
-            {fiveRecent.map((post) => (
-              <PostComponent post={post} />
-            ))}
-          </ul>
-        </div>
-      </div>
-    )
-  }
 </ul>
+{
+  numberOfPosts === "latest" && (
+    <>
+      <div>
+        <h2>Latest Post</h2>
+      </div>
+      <PostComponent post={latestPost} single />
+    </>
+  )
+}
+
+{
+  numberOfPosts === "recents" && (
+    <div class=" recents-list">
+      <h2>Further Reading</h2>
+      <div>
+        <ul>
+          {fiveRecent.map((post) => (
+            <PostComponent post={post} />
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
+}
 
 <style>
   ul {
