@@ -8,8 +8,7 @@ export async function GET(context: any) {
     title: "Astro Learner | Blog",
     description: "My journey learning Astro",
     site: context.site,
-    items: await pagesGlobToRssItems(import.meta.glob("./**/*.md")),
-    //@ts-ignore
+    // items: await pagesGlobToRssItems(import.meta.glob("./**/*.md")),
     items: posts.map((post) => ({
       title: post.data.title,
       pubDate: post.data.pubDate,
